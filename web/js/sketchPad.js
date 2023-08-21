@@ -1,3 +1,4 @@
+
 class SketchPad{
     constructor(container, size=450){
         this.canvas = document.createElement('canvas');
@@ -25,13 +26,19 @@ class SketchPad{
         this.canvas.onmousemove=(evt)=>{
             if(this.isDrawing){                
                 this.path.push(this.#getMouse(evt));
-                console.log(this.path.length)}
+                this.#redraw();
+            }
         }
-
         this.canvas.onmouseup=()=>{
             this.isDrawing=false;
         }
     }
+
+    #redraw(){
+        this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
+        draw.path(this.ctx, this.path);
+    }
+
     #getMouse = (evt) =>{
         const rect = this.canvas.getBoundingClientRect();
         return [
