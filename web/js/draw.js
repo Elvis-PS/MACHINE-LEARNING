@@ -10,6 +10,6 @@ draw.path =(ctx, path, color='black')=>{
     }
 
     ctx.lineCap = "round";
-    ctx.leneJoin = "round";
+    ctx.lineJoin = "round";
     ctx.stroke(); 
 }
