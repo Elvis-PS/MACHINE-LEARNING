@@ -15,14 +15,23 @@ class SketchPad{
 
         this.undoBtn = document.createElement('button');
         this.undoBtn.innerHTML = "UNDO";
+    
+        this.undoBtn.classList.add('undoBnt');
+
         container.appendChild(this.undoBtn);
 
-
         this.paths=[];
-        this.isDrawing = false;
+        this.isDrawing = false;        
+
         this.ctx = this.canvas.getContext("2d");
         this.#addEventListeners();
 
+    }
+
+    reset(){
+        this.paths=[];
+        this.isDrawing = false;
+        this.#redraw();
     }
     
     #addEventListeners(){
@@ -37,7 +46,7 @@ class SketchPad{
                 this.#redraw();
             }
         }
-        this.canvas.onmouseup=()=>{
+        document.onmouseup=()=>{
             this.isDrawing=false;
         }
         this.canvas.ontouchstart=(evt)=>{
@@ -48,20 +57,26 @@ class SketchPad{
             const loc=evt.touches[0];
             this.canvas.onmousemove(loc);
         }
-        this.canvas.ontouchend=()=>{
+        document.ontouchend=()=>{
             this.canvas.onmouseup();
         }
-        this.undoBtn.onclick=(evt)=>{
-            this.paths.pop();
-            this.#redraw();
-
-            this.paths.length>0?this.undoBtn.disabled=false:this.undoBtn.disabled=true;
+        this.undoBtn.onclick=()=>{
+            if(this.paths.length>0){
+                this.paths.pop();
+                this.#redraw();
+            }
         }
     }
 
     #redraw(){
         this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
         this.paths.forEach(path=>draw.path(this.ctx, path));
+
+        if(this.paths.length>=0){
+            this.undoBtn.disabled=false;
+        }else {
+            this.undBtn.disabled=true;
+        }
     }
 
     #getMouse = (evt) =>{

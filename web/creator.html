@@ -9,15 +9,95 @@
 <body>
     <div id="content">
         <h1>Data Creator</h1>
+        <div>
+            <input type="text" id="user" placeholder="type your name">
+            <span id="instructions"></span>
+            <button id="advanceBtn" onclick="start()">START</button>
+        </div>
         <br>
-        <div id="sketchPadContainer"></div>
+        <div id="sketchPadContainer" style="visibility: hidden;"></div>
     </div>
 
     <script src="./js/draw.js"></script>
     <script src="./js/sketchPad.js" ></script>
     <script>
+
+        let index = 0;
+        const labels =[
+            "car", "fish", "house", "three", "bicycle", "guitar", "pencil", "clock",
+        ]
+
+        const data = {
+            user: null,
+            session: new Date().getTime(),
+            drawings:{},
+        }
+
+        const start = () =>{
+            if(user.value==""){
+                alert("Please type your name first");
+                return; 
+            }
+            data.user=user.value;
+            user.style.display = 'none';
+            sketchPadContainer.style.visibility = 'visible';
+            const label = labels[index];
+            instructions.innerHTML = `Please, draw a ${label}`;
+            instructions.style=`
+                padding: 10px 5px;
+                margin-top: 20px;
+                padding: 2px 10px 2px 10px;
+                height: 30px;
+                color: black;
+                font-size: 1.3rem;
+                font-weight: bold;
+                text-shadow: 0px 0px 1px black;
+            `;
+
+            advanceBtn.innerHTML = 'NEXT';
+            advanceBtn.onclick = next;
+        }
+
+        const next = () =>{
+            if(sketchPad.paths.length==0){
+                alert("Draw something first");
+                return;
+            }
+            const label = labels[index];
+            data.drawings[label] = sketchPad.paths;
+            sketchPad.reset();
+            index++;
+
+            if(index<labels.length){
+                const nextLabel = labels[index];
+                instructions.innerHTML = `Please, draw a ${nextLabel}`;
+            }else{
+                sketchPadContainer.style.visibility = "hidden";
+                instructions.innerHTML = "Thank you!";
+                advanceBtn.innerHTML = "SAVE";
+                advanceBtn.onclick=save;
+            }
+        }
+            
+        const save=()=>{
+
+            const element = document.createElement('a');
+            advanceBtn.style.display = 'none';
+            instructions.innerHTML = 'Take your download file and place it alongside the other dataset';
+
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,'+encodeURIComponent(JSON.stringify(data)));
+            const fileName=data.session+".json";
+            element.setAttribute('download', fileName);
+
+            element.style.display = "none";
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);            
+        }
+            
+    
+
         const sketchPadContainer = document.querySelector('#sketchPadContainer'); /* Not realy necessary since we are on the same file as the ID */
-        
         const sketchPad = new SketchPad(sketchPadContainer);
     </script>
 </body>
