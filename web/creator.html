@@ -10,7 +10,7 @@
     <div id="content">
         <h1>Data Creator</h1>
         <div>
-            <input type="text" id="user" placeholder="type your name">
+            <input type="text" id="student" placeholder="type your name">
             <span id="instructions"></span>
             <button id="advanceBtn" onclick="start()">START</button>
         </div>
@@ -28,18 +28,18 @@
         ]
 
         const data = {
-            user: null,
+            student: null,
             session: new Date().getTime(),
             drawings:{},
         }
 
         const start = () =>{
-            if(user.value==""){
+            if(student.value==""){
                 alert("Please type your name first");
                 return; 
             }
-            data.user=user.value;
-            user.style.display = 'none';
+            data.student=student.value;
+            student.style.display = 'none';
             sketchPadContainer.style.visibility = 'visible';
             const label = labels[index];
             instructions.innerHTML = `Please, draw a ${label}`;
@@ -79,8 +79,8 @@
             }
         }
             
+        /* This funciton represents the basic download method of files in javascript */
         const save=()=>{
-
             const element = document.createElement('a');
             advanceBtn.style.display = 'none';
             instructions.innerHTML = 'Take your download file and place it alongside the other dataset';
