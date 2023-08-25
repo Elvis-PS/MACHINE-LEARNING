@@ -6,10 +6,12 @@ draw.path =(ctx, path, color='black')=>{
     ctx.beginPath();
     ctx.moveTo(...path[0]);
     for(let i=0; i<path.length; i++){
-          ctx.lineTo(... path[i]);
+          ctx.lineTo(...path[i]);
     }
 
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
     ctx.stroke(); 
 }
+
+export default draw

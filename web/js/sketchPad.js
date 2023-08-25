@@ -1,6 +1,8 @@
 
+import draw from '../../common/draw.js';
+
 class SketchPad{
-    constructor(container, size=450){
+    constructor(container, size=400){
         this.canvas = document.createElement('canvas');
         this.canvas.width = size;
         this.canvas.height = size;
@@ -48,6 +50,10 @@ class SketchPad{
         }
         document.onmouseup=()=>{
             this.isDrawing=false;
+            // console.log('up');
+        }
+        this.canvas.onmouseleave = ()=>{
+            this.isDrawing = false;
         }
         this.canvas.ontouchstart=(evt)=>{
             const loc=evt.touches[0];
@@ -57,9 +63,9 @@ class SketchPad{
             const loc=evt.touches[0];
             this.canvas.onmousemove(loc);
         }
-        document.ontouchend=()=>{
-            this.canvas.onmouseup();
-        }
+        // this.canvas.ontouchend=()=>{
+        //     this.canvas.onmouseup();
+        // }
         this.undoBtn.onclick=()=>{
             if(this.paths.length>0){
                 this.paths.pop();
@@ -71,12 +77,6 @@ class SketchPad{
     #redraw(){
         this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
         this.paths.forEach(path=>draw.path(this.ctx, path));
-
-        if(this.paths.length>=0){
-            this.undoBtn.disabled=false;
-        }else {
-            this.undBtn.disabled=true;
-        }
     }
 
     #getMouse = (evt) =>{
@@ -88,3 +88,5 @@ class SketchPad{
     }
 
 }
+
+export default SketchPad
