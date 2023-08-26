@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>test</title>
+        <style>
+            *{ 
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            .outterContainer{
+                display: flex;
+                width: 100vw;
+                height: 100vh;
+                flex-direction: column;
+            }
+            .container{
+                position: relative;
+                margin: auto auto;
+                display: flex;
+                flex-direction: column;
+                min-width: 40vw;
+                min-height:40vh;
+                max-width: 80vw;
+                max-width: 80vh;
+                background-color: rgb(204, 204, 204);
+                justify-content: space-evenly;
+                align-items: center;
+            }
+            .one, .two, .three{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-width: 100px;
+                min-height: 100px;
+                background-color: green;
+                color: white;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <div class="outterContainer">
+            <div class="container">
+                <div class="one">
+                    ONE
+                </div>
+                <div class="two">
+                    TWO
+                </div>
+                <div class="three">
+                    THREE
+                </div>
+            </div>
+        </div>
+        <script>
+
+            let objEmployee = {"name": "Eu", "age": 36, "profession": "electrician"};
+
+            let stringfiedObj = JSON.stringify(objEmployee);
+            // console.log(stringfiedObj);
+             
+            objEmployee = JSON.parse(stringfiedObj);
+            console.log(objEmployee);
+
+            
+
+            // const promise = fetch('https://jsonplaceholder.typicode.com/posts/1/comments').then(res=>res.json());
+            // promise.then(res=>console.log(res));
+
+
+
+            // const employee2 = {...employee1, name: 'Gil', sex: 'M'};
+            // console.log(employee2);
+
+            // /* Dont forget that you have to pass a call back function to the then method */
+            // const promise = fetch('https://jsonplaceholder.typicode.com/posts/1/comments').then(res=>res.json())
+            
+            // // promise.then(value=>console.log(value));
+
+            // async function fetchUsers(){
+            //     const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+            //     const data = await res.json();
+                
+
+            //     (()=>console.log(data))();
+            // }
+            // fetchUsers();
+
+        </script>
+    </body>
+</html>
