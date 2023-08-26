@@ -14,4 +14,15 @@ draw.path =(ctx, path, color='black')=>{
     ctx.stroke(); 
 }
 
+draw.paths = (ctx, paths, color='black')=>{
+    for(const path of paths){
+        draw.path(ctx, path, color);
+    }
+}
+
+ /* For the frontend application */
 export default draw
+
+/* For the backend application */
+if(typeof module!=='undefined')module.exports = draw;
+

@@ -76,7 +76,7 @@ class SketchPad{
 
     #redraw(){
         this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
-        this.paths.forEach(path=>draw.path(this.ctx, path));
+        draw.paths(this.ctx, this.paths);
     }
 
     #getMouse = (evt) =>{
