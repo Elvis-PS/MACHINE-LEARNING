@@ -1,5 +1,11 @@
 
-import draw from '../../common/draw.js';
+// import draw from '../../common/draw.js';
+// const draw = require('../../common/draw.js');
+
+ /* For the frontend application */
+ 
+ /* For the backend application */
+ if(typeof module!=='undefined')module.exports = draw;
 
 class SketchPad{
     constructor(container, size=400){
@@ -88,5 +94,3 @@ class SketchPad{
     }
 
 }
-
-export default SketchPad

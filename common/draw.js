@@ -21,8 +21,8 @@ draw.paths = (ctx, paths, color='black')=>{
 }
 
  /* For the frontend application */
-export default draw
+ 
+ /* For the backend application */
+ if(typeof module!=='undefined')module.exports = draw;
 
-/* For the backend application */
-if(typeof module!=='undefined')module.exports = draw;
 

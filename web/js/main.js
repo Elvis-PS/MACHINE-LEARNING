@@ -1,4 +1,4 @@
-import SketchPad from './sketchPad.js';
+// import SketchPad from './sketchPad.js';
 
         const sketchPadContainer = document.querySelector('#sketchPadContainer');
         const sketchPad = new SketchPad(sketchPadContainer);
