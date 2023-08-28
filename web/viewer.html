@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Viewer</title>
+</head>
+<body>
+    <h1>Data Viewer</h1>
+    <div id="container"></div>
+    <script src="../common/js_objects/samples.js"></script>
+    <script src="../common/constants.js"></script>
+    <script src="../common/utils.js"></script>
+    <script src="js/display.js"></script>
+    <script>
+        const groups = utils.groupBy(samples,"student_id");
+
+        for(let student_id in groups){
+            //I assign the array correspondig the key to the sample variable.
+            const samples = groups[student_id];
+            //Because the student_name on each object of the array is the same, we get it only once.
+            const studentName=samples[0].student_name;
+            //we create a UI component with the student_name
+            createRow(container, studentName, samples);
+        }
+    </script>
+</body>
+</html>

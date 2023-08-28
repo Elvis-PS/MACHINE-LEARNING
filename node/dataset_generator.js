@@ -19,6 +19,7 @@ fileNames.forEach((fileName)=>{
     //method used to read the content of a file
     const content = fs.readFileSync(constants.RAW_DIR+'/'+fileName);
     const {session, student, drawings} = JSON.parse(content);
+    // for each label(drawing name) on each drawings we create a object sample
     for(let label in drawings){
         samples.push({
             id,
@@ -26,9 +27,14 @@ fileNames.forEach((fileName)=>{
             student_name:student,
             student_id:session,
         });
+        // The coords. representing each individual drawing(labeled)
         const paths = drawings[label];
+
+        //we create a json file for each drawing on the drawing obj.
         fs.writeFileSync(constants.JSON_DIR+'/'+id+'.json', JSON.stringify(paths));
-        generateImageFile(constants.IMG_DIR+'/'+id+'.png', paths);
+        
+        //we also generate an img(png) for each drawing on the drawing obj.
+        generateImageFile(constants.IMG_DIR+'/'+id+'.png', paths);  
         utils.printProgress(id, fileNames.length*8);
         id++;
     }
@@ -42,7 +48,10 @@ function generateImageFile(outFile, paths){
      
 }
 
+/* this method generates a json file with all items in samples array */
 fs.writeFileSync(constants.SAMPLES, JSON.stringify(samples));
+/* This method generates a JS file with all items of samples array inside another array */
+fs.writeFileSync(constants.SAMPLES_JS, "const samples="+ JSON.stringify(samples)+";");
 
 
  
