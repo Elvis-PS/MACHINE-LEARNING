@@ -56,3 +56,13 @@ button:hover {
 button:active{
     opacity: 0.5;
 }
+
+.row{
+    display: flex;
+}
+.thumb{
+    width:10%;
+}
+.rowLabel{
+    width:15%;
+}

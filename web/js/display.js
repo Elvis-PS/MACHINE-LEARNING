@@ -1,3 +1,4 @@
+
 function createRow(container, studentName, samples){
     const row = document.createElement("div");
     row.classList.add("row"); 
@@ -5,13 +6,15 @@ function createRow(container, studentName, samples){
 
     const rowLabel=document.createElement("div");
     rowLabel.innerHTML=studentName;
-    rowLabel.classList.add('rowLabel');
+    rowLabel.classList.add("rowLabel");
 
     row.appendChild(rowLabel); 
+    samples.forEach((obj, index)=>{
+        const {id} = obj;
+        const img = document.createElement('img');
+        img.src = "/data/dataset/img/"+id+".png";
+        img.classList.add("thumb");
+        row.appendChild(img);
 
-    
-    for(let sample in samples){
-        //this code is probably broken. It should not print a number, but an object here
-        console.log(sample);
-    }
+    })
 }

@@ -8,15 +8,17 @@
 <body>
     <h1>Data Viewer</h1>
     <div id="container"></div>
+    <script>src="/common/constants.js" </script>
     <script src="../common/js_objects/samples.js"></script>
-    <script src="../common/constants.js"></script>
-    <script src="../common/utils.js"></script>
+    <script src="/common/draw.js"></script>
+    <script src="/common/utils.js"></script>
     <script src="js/display.js"></script>
     <script>
         const groups = utils.groupBy(samples,"student_id");
 
         for(let student_id in groups){
             //I assign the array correspondig the key to the sample variable.
+            // salples is an Array[]
             const samples = groups[student_id];
             //Because the student_name on each object of the array is the same, we get it only once.
             const studentName=samples[0].student_name;
