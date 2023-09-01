@@ -10,11 +10,26 @@ function createRow(container, studentName, samples){
 
     row.appendChild(rowLabel); 
     samples.forEach((obj, index)=>{
-        const {id} = obj;
+        const {id, label, student_id} = obj;
+
+        const sampleContainer=document.createElement('div');  
+        sampleContainer.id="sample_"+id;
+        sampleContainer.classList.add("sampleContainer");
+
+        const sampleLabel=document.createElement('div');
+        sampleLabel.innerHTML=label;
+        sampleContainer.appendChild(sampleLabel);
+
         const img = document.createElement('img');
         img.src = "/data/dataset/img/"+id+".png";
         img.classList.add("thumb");
-        row.appendChild(img);
+
+        if(utils.flaggedUsers.includes(student_id)){
+            img.classList.add('blur');
+        }
+
+        sampleContainer.appendChild(img);
+        row.appendChild(sampleContainer);
 
     })
 }
